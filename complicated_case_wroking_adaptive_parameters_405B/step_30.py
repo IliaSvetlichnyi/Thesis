@@ -1,5 +1,6 @@
-
+import pandas as pd
 import pywt
+from sklearn.preprocessing import StandardScaler
 
 def step_30(Segments_normalized, Dec_levels):
     Features = []
