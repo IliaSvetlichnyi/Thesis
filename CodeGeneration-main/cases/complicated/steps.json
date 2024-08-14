@@ -1,0 +1,79 @@
+[
+    {
+        "step_id": "10",
+        "description": "Import raw data from CSV and segment it",
+        "dependencies": [],
+        "input_vars": [
+            "csv_path",
+            "SizeSegment"
+        ],
+        "output_vars": [
+            "Segments"
+        ],
+        "additional_info": "Use pandas to read the CSV and create segments of size SizeSegment."
+    },
+    {
+        "step_id": "20",
+        "description": "Normalize the segmented data using MinMaxScaler",
+        "dependencies": [
+            "10"
+        ],
+        "input_vars": [
+            "Segments"
+        ],
+        "output_vars": [
+            "Segments_normalized"
+        ],
+        "additional_info": "Segments is a list of 1D numpy arrays. Each segment should be normalized independently."
+    },
+    {
+        "step_id": "30",
+        "description": "Extract features using wavelet decomposition",
+        "dependencies": [
+            "20"
+        ],
+        "input_vars": [
+            "Segments_normalized",
+            "Dec_levels"
+        ],
+        "output_vars": [
+            "Features"
+        ],
+        "additional_info": "Use pywavelets (pywt) library with 'db3' wavelet and specified Dec_levels."
+    },
+    {
+        "step_id": "40",
+        "description": "Apply PCA for dimension reduction",
+        "dependencies": [
+            "30"
+        ],
+        "input_vars": [
+            "Features",
+            "NC_pca"
+        ],
+        "output_vars": [
+            "PCA_Features",
+            "pca"
+        ],
+        "additional_info": "Use sklearn's PCA. Return both the transformed features and the PCA object."
+    },
+    {
+        "step_id": "50",
+        "description": "Train model, evaluate, and calculate metrics",
+        "dependencies": [
+            "40"
+        ],
+        "input_vars": [
+            "PCA_Features",
+            "kernel",
+            "nu",
+            "gamma"
+        ],
+        "output_vars": [
+            "FittedClassifier",
+            "Prec_learn",
+            "Prec_test"
+        ],
+        "additional_info": "\n        1. Create labels: np.ones for learning data.\n        2. Split data into train and test sets (80% train, 20% test).\n        3. Create and fit a One-Class SVM classifier using sklearn.\n        4. Predict labels for training data.\n        5. Calculate error rate for training data.\n        6. Predict labels for test data (assume all test data as anomaly, i.e., -1).\n        7. Calculate error rate for test data.\n        8. Calculate precision as 1 - error_rate for both training and test.\n        Return the fitted classifier and both precision values.\n        "
+    }
+]

@@ -1,0 +1,307 @@
+2024-08-14 23:02:04.467 | INFO     | language_modeling:execute_request:51 - Full API response: {'id': 'gen-xfVTl2bV4Dg8tTxM9bukUMKaEXdV', 'model': 'meta-llama/llama-3-70b-instruct', 'object': 'chat.completion', 'created': 1723662122, 'choices': [{'logprobs': None, 'finish_reason': 'stop', 'index': 0, 'message': {'role': 'assistant', 'content': "Here is the Python function named 'step_11':\n\n```\nimport pandas as pd\n\ndef step_11(csv_path):\n    return pd.read_csv(csv_path)\n```"}}], 'usage': {'prompt_tokens': 1067, 'completion_tokens': 35, 'total_tokens': 1102}}
+2024-08-14 23:02:04.475 | INFO     | orchestrator:generate_step_file:154 - generated step source for step 11, filename: step_11.py,
+source:
+ 
+
+import pandas as pd
+
+def step_11(csv_path):
+    return pd.read_csv(csv_path)
+
+2024-08-14 23:02:04.477 | INFO     | orchestrator:generate_validation_file:173 - generated validation source for step 11, filename: validate_step_11.py,
+source:
+ import pandas as pd
+from step_11 import step_11
+
+
+csv_path = '/Users/ilya/Desktop/CodeGeneration-main/datasets/insurance.csv'
+
+def validate_step():
+    df = step_11(csv_path)
+    print(df)
+
+if __name__ == '__main__':
+    validate_step()
+
+2024-08-14 23:02:04.478 | INFO     | orchestrator:validate_unit_code:231 - running validate_step_11.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:04.478 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 validate_step_11.py
+2024-08-14 23:02:04.788 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 0
+2024-08-14 23:02:09.499 | INFO     | language_modeling:execute_request:51 - Full API response: {'id': 'gen-K983YKUuuoe0M5FsIOxn004QGJQ1', 'model': 'meta-llama/llama-3-70b-instruct', 'object': 'chat.completion', 'created': 1723662126, 'choices': [{'logprobs': {'tokens': None, 'token_logprobs': None, 'top_logprobs': None, 'text_offset': None}, 'finish_reason': 'stop', 'index': 0, 'message': {'role': 'assistant', 'content': "Here is the Python function definition for 'step_21':\n\n```\nimport pandas as pd\n\ndef step_21(df):\n    structure_info = {\n        'columns': list(df.columns),\n        'data_types': df.dtypes.to_dict(),\n        'value_counts': {column: df[column].value_counts().head(5).to_dict() for column in df.columns},\n        'statistical_description': df.describe().to_dict()\n    }\n    return structure_info\n```"}}], 'usage': {'prompt_tokens': 1069, 'completion_tokens': 97, 'total_tokens': 1166}}
+2024-08-14 23:02:09.503 | INFO     | orchestrator:generate_step_file:154 - generated step source for step 21, filename: step_21.py,
+source:
+ 
+
+import pandas as pd
+
+def step_21(df):
+    structure_info = {
+        'columns': list(df.columns),
+        'data_types': df.dtypes.to_dict(),
+        'value_counts': {column: df[column].value_counts().head(5).to_dict() for column in df.columns},
+        'statistical_description': df.describe().to_dict()
+    }
+    return structure_info
+
+2024-08-14 23:02:09.505 | INFO     | orchestrator:generate_validation_file:173 - generated validation source for step 21, filename: validate_step_21.py,
+source:
+ import pandas as pd
+from step_11 import step_11
+from step_21 import step_21
+
+
+csv_path = '/Users/ilya/Desktop/CodeGeneration-main/datasets/insurance.csv'
+
+def validate_step():
+    df = step_11(csv_path)
+    structure_info = step_21(df)
+    print(structure_info)
+
+if __name__ == '__main__':
+    validate_step()
+
+2024-08-14 23:02:09.505 | INFO     | orchestrator:validate_unit_code:231 - running validate_step_21.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:09.506 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 validate_step_21.py
+2024-08-14 23:02:09.803 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 0
+2024-08-14 23:02:12.833 | INFO     | language_modeling:execute_request:51 - Full API response: {'id': 'gen-qEw0ZxOmkgT9dxCkNu4BnKIyJqNL', 'model': 'meta-llama/llama-3-70b-instruct', 'object': 'chat.completion', 'created': 1723662131, 'choices': [{'logprobs': None, 'finish_reason': 'eos', 'index': 0, 'message': {'role': 'assistant', 'content': 'Here is the Python function `step_31`:\n```\nimport pandas as pd\nimport numpy as np\n\ndef step_31(df):\n    # Identify missing values\n    missing_values = df.isnull().sum()\n    print("Missing values:", missing_values)\n    \n    # Identify data types\n    data_types = df.dtypes\n    print("Data types:", data_types)\n    \n    # Handle missing values\n    if missing_values.any():\n        df_cleaned = df.fillna(df.mean())  # replace missing values with mean\n    else:\n        df_cleaned = df\n    \n    data_types_info = data_types.to_dict()\n    \n    return df_cleaned, data_types_info\n```\nLet me know if this meets your requirements!!'}}], 'usage': {'prompt_tokens': 1081, 'completion_tokens': 154, 'total_tokens': 1235}}
+2024-08-14 23:02:12.837 | INFO     | orchestrator:generate_step_file:154 - generated step source for step 31, filename: step_31.py,
+source:
+ 
+import pandas as pd
+import numpy as np
+
+def step_31(df):
+    # Identify missing values
+    missing_values = df.isnull().sum()
+    print("Missing values:", missing_values)
+    
+    # Identify data types
+    data_types = df.dtypes
+    print("Data types:", data_types)
+    
+    # Handle missing values
+    if missing_values.any():
+        df_cleaned = df.fillna(df.mean())  # replace missing values with mean
+    else:
+        df_cleaned = df
+    
+    data_types_info = data_types.to_dict()
+    
+    return df_cleaned, data_types_info
+
+Let me know if this meets your requirements!!
+
+2024-08-14 23:02:12.839 | INFO     | orchestrator:generate_validation_file:173 - generated validation source for step 31, filename: validate_step_31.py,
+source:
+ import pandas as pd
+from step_11 import step_11
+from step_21 import step_21
+from step_31 import step_31
+
+
+csv_path = '/Users/ilya/Desktop/CodeGeneration-main/datasets/insurance.csv'
+
+def validate_step():
+    df = step_11(csv_path)
+    structure_info = step_21(df)
+    df_cleaned, data_types_info = step_31(df)
+    print(df_cleaned, data_types_info)
+
+if __name__ == '__main__':
+    validate_step()
+
+2024-08-14 23:02:12.839 | INFO     | orchestrator:validate_unit_code:231 - running validate_step_31.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:12.839 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 validate_step_31.py
+2024-08-14 23:02:13.109 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 1
+2024-08-14 23:02:18.912 | INFO     | language_modeling:execute_request:51 - Full API response: {'id': 'gen-FUDTNvTQrHYuRpmodQHbowaWfhVr', 'model': 'meta-llama/llama-3-70b-instruct', 'object': 'chat.completion', 'created': 1723662134, 'choices': [{'logprobs': {'tokens': None, 'token_logprobs': None, 'top_logprobs': None, 'text_offset': None}, 'finish_reason': 'stop', 'index': 0, 'message': {'role': 'assistant', 'content': 'Here is the corrected code snippet:\n\n```\nimport pandas as pd\nimport numpy as np\n\ndef step_31(df):\n    # Identify missing values\n    missing_values = df.isnull().sum()\n    print("Missing values:", missing_values)\n    \n    # Identify data types\n    data_types = df.dtypes\n    print("Data types:", data_types)\n    \n    # Handle missing values\n    if missing_values.any():\n        df_cleaned = df.fillna(df.mean())  # replace missing values with mean\n    else:\n        df_cleaned = df\n    \n    data_types_info = data_types.to_dict()\n    return df_cleaned, data_types_info'}}], 'usage': {'prompt_tokens': 275, 'completion_tokens': 136, 'total_tokens': 411}}
+2024-08-14 23:02:18.916 | INFO     | orchestrator:fix_step_source:216 - fixing step source for step 31, filename: step_31.py,
+source: 
+
+import pandas as pd
+import numpy as np
+
+def step_31(df):
+    # Identify missing values
+    missing_values = df.isnull().sum()
+    print("Missing values:", missing_values)
+    
+    # Identify data types
+    data_types = df.dtypes
+    print("Data types:", data_types)
+    
+    # Handle missing values
+    if missing_values.any():
+        df_cleaned = df.fillna(df.mean())  # replace missing values with mean
+    else:
+        df_cleaned = df
+    
+    data_types_info = data_types.to_dict()
+    return df_cleaned, data_types_info
+
+2024-08-14 23:02:18.918 | INFO     | orchestrator:validate_unit_code:231 - running validate_step_31.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:18.920 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 validate_step_31.py
+2024-08-14 23:02:19.251 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 0
+2024-08-14 23:02:26.528 | INFO     | language_modeling:execute_request:51 - Full API response: {'id': 'gen-MMGc8MOpQEE0J7ZbjxH8qlGLLp5K', 'model': 'meta-llama/llama-3-70b-instruct', 'object': 'chat.completion', 'created': 1723662140, 'choices': [{'logprobs': {'tokens': None, 'token_logprobs': None, 'top_logprobs': None, 'text_offset': None}, 'finish_reason': 'stop', 'index': 0, 'message': {'role': 'assistant', 'content': "Here is the function definition for 'step_41':\n\n```\nimport pandas as pd\nfrom sklearn.preprocessing import OrdinalEncoder\n\ndef step_41(df_cleaned, data_types_info):\n    df_encoded = df_cleaned.copy()\n    categorical_cols = [col for col, dtype in data_types_info.items() if dtype == 'object']\n    encoder = OrdinalEncoder()\n    df_encoded[categorical_cols] = encoder.fit_transform(df_encoded[categorical_cols])\n    return df_encoded\n```"}}], 'usage': {'prompt_tokens': 1086, 'completion_tokens': 100, 'total_tokens': 1186}}
+2024-08-14 23:02:26.534 | INFO     | orchestrator:generate_step_file:154 - generated step source for step 41, filename: step_41.py,
+source:
+ 
+
+import pandas as pd
+from sklearn.preprocessing import OrdinalEncoder
+
+def step_41(df_cleaned, data_types_info):
+    df_encoded = df_cleaned.copy()
+    categorical_cols = [col for col, dtype in data_types_info.items() if dtype == 'object']
+    encoder = OrdinalEncoder()
+    df_encoded[categorical_cols] = encoder.fit_transform(df_encoded[categorical_cols])
+    return df_encoded
+
+2024-08-14 23:02:26.536 | INFO     | orchestrator:generate_validation_file:173 - generated validation source for step 41, filename: validate_step_41.py,
+source:
+ import pandas as pd
+from step_11 import step_11
+from step_21 import step_21
+from step_31 import step_31
+from step_41 import step_41
+
+
+csv_path = '/Users/ilya/Desktop/CodeGeneration-main/datasets/insurance.csv'
+
+def validate_step():
+    df = step_11(csv_path)
+    structure_info = step_21(df)
+    df_cleaned, data_types_info = step_31(df)
+    df_encoded = step_41(df_cleaned, data_types_info)
+    print(df_encoded)
+
+if __name__ == '__main__':
+    validate_step()
+
+2024-08-14 23:02:26.536 | INFO     | orchestrator:validate_unit_code:231 - running validate_step_41.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:26.537 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 validate_step_41.py
+2024-08-14 23:02:27.260 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 0
+2024-08-14 23:02:34.496 | INFO     | language_modeling:execute_request:51 - Full API response: {'id': 'gen-9PWAW5hRs4VJWtchLcIL53EKsAjr', 'model': 'meta-llama/llama-3-70b-instruct', 'object': 'chat.completion', 'created': 1723662148, 'choices': [{'logprobs': {'tokens': None, 'token_logprobs': None, 'top_logprobs': None, 'text_offset': None}, 'finish_reason': 'stop', 'index': 0, 'message': {'role': 'assistant', 'content': "Here is the Python function named 'step_51':\n\n```\nimport pandas as pd\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestRegressor\n\ndef step_51(df_encoded):\n    X = df_encoded.drop('charges', axis=1)\n    y = df_encoded['charges']\n    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n    model = RandomForestRegressor(n_estimators=100, random_state=42)\n    model.fit(X_train, y_train)\n    return model, X_train, X_test, y_train, y_test\n```"}}], 'usage': {'prompt_tokens': 1108, 'completion_tokens': 137, 'total_tokens': 1245}}
+2024-08-14 23:02:34.499 | INFO     | orchestrator:generate_step_file:154 - generated step source for step 51, filename: step_51.py,
+source:
+ 
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
+
+def step_51(df_encoded):
+    X = df_encoded.drop('charges', axis=1)
+    y = df_encoded['charges']
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    model = RandomForestRegressor(n_estimators=100, random_state=42)
+    model.fit(X_train, y_train)
+    return model, X_train, X_test, y_train, y_test
+
+2024-08-14 23:02:34.500 | INFO     | orchestrator:generate_validation_file:173 - generated validation source for step 51, filename: validate_step_51.py,
+source:
+ import pandas as pd
+from step_11 import step_11
+from step_21 import step_21
+from step_31 import step_31
+from step_41 import step_41
+from step_51 import step_51
+
+
+csv_path = '/Users/ilya/Desktop/CodeGeneration-main/datasets/insurance.csv'
+
+def validate_step():
+    df = step_11(csv_path)
+    structure_info = step_21(df)
+    df_cleaned, data_types_info = step_31(df)
+    df_encoded = step_41(df_cleaned, data_types_info)
+    model, X_train, X_test, y_train, y_test = step_51(df_encoded)
+    print(model, X_train, X_test, y_train, y_test)
+
+if __name__ == '__main__':
+    validate_step()
+
+2024-08-14 23:02:34.502 | INFO     | orchestrator:validate_unit_code:231 - running validate_step_51.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:34.504 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 validate_step_51.py
+2024-08-14 23:02:35.416 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 0
+2024-08-14 23:02:40.240 | INFO     | language_modeling:execute_request:51 - Full API response: {'id': 'gen-NMIrY3XbYG43TmTTpdIwxXJLFYjC', 'model': 'meta-llama/llama-3-70b-instruct', 'object': 'chat.completion', 'created': 1723662156, 'choices': [{'logprobs': None, 'finish_reason': 'eos', 'index': 0, 'message': {'role': 'assistant', 'content': "Here is the Python function `step_61` that evaluates the model's performance on both training and testing data and calculates evaluation metrics:\n```\nimport pandas as pd\nfrom sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, r2_score, mean_squared_error\n\ndef step_61(model, X_train, X_test, y_train, y_test):\n    y_train_pred = model.predict(X_train)\n    y_test_pred = model.predict(X_test)\n\n    if y_train.dtype.kind in ['i', 'f']:  # regression\n        metrics = ['R^2', 'MSE', 'RMSE']\n        evaluation_results = {\n            'Train': [r2_score(y_train, y_train_pred), mean_squared_error(y_train, y_train_pred), mean_squared_error(y_train, y_train_pred, squared=False)],\n            'Test': [r2_score(y_test, y_test_pred), mean_squared_error(y_test, y_test_pred), mean_squared_error(y_test, y_test_pred, squared=False)]\n        }\n    else:  # classification\n        metrics = ['Accuracy', 'Precision', 'Recall', 'F1-score']\n        evaluation_results = {\n            'Train': [accuracy_score(y_train, y_train_pred), precision_score(y_train, y_train_pred, average='weighted'), recall_score(y_train, y_train_pred, average='weighted'), f1_score(y_train, y_train_pred, average='weighted')],\n            'Test': [accuracy_score(y_test, y_test_pred), precision_score(y_test, y_test_pred, average='weighted'), recall_score(y_test, y_test_pred, average='weighted'), f1_score(y_test, y_test_pred, average='weighted')]\n        }\n    return evaluation_results, metrics"}}], 'usage': {'prompt_tokens': 1122, 'completion_tokens': 360, 'total_tokens': 1482}}
+2024-08-14 23:02:40.244 | INFO     | orchestrator:generate_step_file:154 - generated step source for step 61, filename: step_61.py,
+source:
+ 
+import pandas as pd
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, r2_score, mean_squared_error
+
+def step_61(model, X_train, X_test, y_train, y_test):
+    y_train_pred = model.predict(X_train)
+    y_test_pred = model.predict(X_test)
+
+    if y_train.dtype.kind in ['i', 'f']:  # regression
+        metrics = ['R^2', 'MSE', 'RMSE']
+        evaluation_results = {
+            'Train': [r2_score(y_train, y_train_pred), mean_squared_error(y_train, y_train_pred), mean_squared_error(y_train, y_train_pred, squared=False)],
+            'Test': [r2_score(y_test, y_test_pred), mean_squared_error(y_test, y_test_pred), mean_squared_error(y_test, y_test_pred, squared=False)]
+        }
+    else:  # classification
+        metrics = ['Accuracy', 'Precision', 'Recall', 'F1-score']
+        evaluation_results = {
+            'Train': [accuracy_score(y_train, y_train_pred), precision_score(y_train, y_train_pred, average='weighted'), recall_score(y_train, y_train_pred, average='weighted'), f1_score(y_train, y_train_pred, average='weighted')],
+            'Test': [accuracy_score(y_test, y_test_pred), precision_score(y_test, y_test_pred, average='weighted'), recall_score(y_test, y_test_pred, average='weighted'), f1_score(y_test, y_test_pred, average='weighted')]
+        }
+    return evaluation_results, metrics
+
+2024-08-14 23:02:40.250 | INFO     | orchestrator:generate_validation_file:173 - generated validation source for step 61, filename: validate_step_61.py,
+source:
+ import pandas as pd
+from step_11 import step_11
+from step_21 import step_21
+from step_31 import step_31
+from step_41 import step_41
+from step_51 import step_51
+from step_61 import step_61
+
+
+csv_path = '/Users/ilya/Desktop/CodeGeneration-main/datasets/insurance.csv'
+
+def validate_step():
+    df = step_11(csv_path)
+    structure_info = step_21(df)
+    df_cleaned, data_types_info = step_31(df)
+    df_encoded = step_41(df_cleaned, data_types_info)
+    model, X_train, X_test, y_train, y_test = step_51(df_encoded)
+    evaluation_results, metrics = step_61(model, X_train, X_test, y_train, y_test)
+    print(evaluation_results, metrics)
+
+if __name__ == '__main__':
+    validate_step()
+
+2024-08-14 23:02:40.251 | INFO     | orchestrator:validate_unit_code:231 - running validate_step_61.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:40.252 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 validate_step_61.py
+2024-08-14 23:02:41.190 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 0
+2024-08-14 23:02:41.192 | INFO     | orchestrator:generate_main_file:192 - generated main source, filename: main.py,
+source:
+ import pandas as pd
+from step_11 import step_11
+from step_21 import step_21
+from step_31 import step_31
+from step_41 import step_41
+from step_51 import step_51
+from step_61 import step_61
+
+csv_path = '/Users/ilya/Desktop/CodeGeneration-main/datasets/insurance.csv'
+
+def main():
+    df = step_11(csv_path)
+    structure_info = step_21(df)
+    df_cleaned, data_types_info = step_31(df)
+    df_encoded = step_41(df_cleaned, data_types_info)
+    model, X_train, X_test, y_train, y_test = step_51(df_encoded)
+    evaluation_results, metrics = step_61(model, X_train, X_test, y_train, y_test)
+    evaluation_results, metrics = step_61(model, X_train, X_test, y_train, y_test)
+    print(evaluation_results, metrics)
+
+if __name__ == '__main__':
+    main()
+
+
+2024-08-14 23:02:41.193 | INFO     | orchestrator:validate_unit_code:231 - running main.py in /Users/ilya/Desktop/CodeGeneration-main/src/out
+2024-08-14 23:02:41.193 | INFO     | orchestrator:validate_unit_code:233 - /Users/ilya/thesis_env/myenv/bin/python3 main.py
+2024-08-14 23:02:42.014 | DEBUG    | orchestrator:validate_unit_code:240 - exit_code = 0
+2024-08-14 23:02:42.015 | INFO     | orchestrator:run_steps:134 - code generated successfully!

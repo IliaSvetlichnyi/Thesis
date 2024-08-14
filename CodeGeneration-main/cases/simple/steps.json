@@ -1,0 +1,99 @@
+[
+    {
+        "step_id": "11",
+        "description": "Load the CSV file as pandas DataFrame",
+        "dependencies": [],
+        "input_vars": [
+            "csv_path"
+        ],
+        "output_vars": [
+            "df"
+        ],
+        "additional_info": ""
+    },
+    {
+        "step_id": "21",
+        "description": "Examine the structure and characteristics of the data",
+        "dependencies": [
+            "11"
+        ],
+        "input_vars": [
+            "df"
+        ],
+        "output_vars": [
+            "structure_info"
+        ],
+        "additional_info": ""
+    },
+    {
+        "step_id": "31",
+        "description": "Identify missing values, data types, and handle missing values if there are any",
+        "dependencies": [
+            "11",
+            "21"
+        ],
+        "input_vars": [
+            "df"
+        ],
+        "output_vars": [
+            "df_cleaned",
+            "data_types_info"
+        ],
+        "additional_info": ""
+    },
+    {
+        "step_id": "41",
+        "description": "Identify if there is a need to convert categorical variables to numerical representations. If yes, then convert them.",
+        "dependencies": [
+            "11",
+            "31"
+        ],
+        "input_vars": [
+            "df_cleaned",
+            "data_types_info"
+        ],
+        "output_vars": [
+            "df_encoded"
+        ],
+        "additional_info": ""
+    },
+    {
+        "step_id": "51",
+        "description": "Split the preprocessed data into training and testing sets, and implement a machine learning algorithm (choose from scikit-learn, XGBoost, LightGBM, or CatBoost).",
+        "dependencies": [
+            "11",
+            "31",
+            "41"
+        ],
+        "input_vars": [
+            "df_encoded"
+        ],
+        "output_vars": [
+            "model",
+            "X_train",
+            "X_test",
+            "y_train",
+            "y_test"
+        ],
+        "additional_info": ""
+    },
+    {
+        "step_id": "61",
+        "description": "Evaluate the model's performance on both training and testing data, calculate evaluation metrics (for classification: [accuracy, precision, recall, F1-score]; for regression: [R^2, MSE, RMSE]), and compare the difference.",
+        "dependencies": [
+            "51"
+        ],
+        "input_vars": [
+            "model",
+            "X_train",
+            "X_test",
+            "y_train",
+            "y_test"
+        ],
+        "output_vars": [
+            "evaluation_results",
+            "metrics"
+        ],
+        "additional_info": ""
+    }
+]
